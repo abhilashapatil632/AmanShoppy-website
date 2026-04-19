@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aman Shoppy - Luxury Perfumes | World of Scents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="index">
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+    <button class="icon-btn" id="closeMobile" aria-label="Close menu">✕</button>
+    <ul class="mobile-menu">
+      <li><a href="index.html#mens">Men's Perfumes</a></li>
+      <li><a href="index.html#womens">Women's Perfumes</a></li>
+      <li><a href="index.html#brands">Unisex</a></li>
+      <li><a href="index.html#brands">Featured Brands</a></li>
+      <li><a href="index.html#best">Best Sellers</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="dashboard.html">My Account</a></li>
+    </ul>
+  </aside>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-head">
+      <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #8f7020;">Your Cart</h3>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
+        <strong>Total</strong>
+        <strong id="cartTotal">Rs. 0</strong>
+      </div>
+      <button class="btn-gold" id="checkoutOpen" style="width:100%;" aria-label="Proceed to checkout">Checkout</button>
+    </div>
+  </aside>
+
+  <section class="checkout-modal" id="checkoutModal" aria-hidden="true">
+    <div class="checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <button class="icon-btn close-login" id="closeCheckout" aria-label="Close checkout">✕</button>
+      <h3 id="checkoutTitle">Secure Checkout</h3>
+
+      <div class="checkout-grid">
+        <form id="checkoutForm" novalidate>
+          <div class="checkout-group">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" name="fullName" type="text" required>
+            <p class="field-error" id="nameError" aria-live="polite"></p>
+          </div>
+
+          <div class="checkout-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input id="phoneNumber" name="phoneNumber" type="tel" required>
+            <p class="field-error" id="phoneError" aria-live="polite"></p>
+          </div>
+
+          <div class="checkout-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" required></textarea>
+            <p class="field-error" id="addressError" aria-live="polite"></p>
+          </div>
+
+          <div class="checkout-group">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" required>
+            <p class="field-error" id="cityError" aria-live="polite"></p>
+          </div>
+
+          <div class="checkout-group">
+            <label for="pincode">Pincode</label>
+            <input id="pincode" name="pincode" type="text" required>
+            <p class="field-error" id="pincodeError" aria-live="polite"></p>
+          </div>
+
+          <fieldset class="payment-methods">
+            <legend style="color: var(--gold); margin-bottom: 6px;">Payment Method</legend>
+            <label><input type="radio" name="paymentMethod" value="cod" checked> Cash on Delivery</label>
+            <label><input type="radio" name="paymentMethod" value="upi"> UPI (Google Pay / PhonePe / Paytm)</label>
+            <label><input type="radio" name="paymentMethod" value="card"> Card Payment</label>
+          </fieldset>
+
+          <div class="payment-extra" id="upiSection">
+            <div class="checkout-group">
+              <label for="upiId">UPI ID</label>
+              <input id="upiId" type="text" placeholder="yourname@upi">
+              <p class="field-error" id="upiError" aria-live="polite"></p>
+            </div>
+            <div class="qr-box">QR Placeholder</div>
+          </div>
+
+          <div class="payment-extra" id="cardSection">
+            <div class="checkout-group">
+              <label for="cardNumber">Card Number</label>
+              <input id="cardNumber" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456">
+              <p class="field-error" id="cardError" aria-live="polite"></p>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div class="checkout-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input id="expiryDate" type="text" placeholder="MM/YY">
+                <p class="field-error" id="expiryError" aria-live="polite"></p>
+              </div>
+              <div class="checkout-group">
+                <label for="cvv">CVV</label>
+                <input id="cvv" type="password" inputmode="numeric" placeholder="123">
+                <p class="field-error" id="cvvError" aria-live="polite"></p>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <aside class="summary-box" aria-label="Order summary">
+          <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 1.5rem; margin-bottom: 8px;">Order Summary</h4>
+          <div id="checkoutSummaryItems" class="summary-items"></div>
+          <div style="display:flex; justify-content: space-between; margin-bottom: 6px;">
+            <strong>Total Qty</strong><strong id="checkoutTotalQty">0</strong>
+          </div>
+          <div style="display:flex; justify-content: space-between;">
+            <strong>Total Amount</strong><strong id="checkoutTotalAmount">Rs. 0</strong>
+          </div>
+        </aside>
+      </div>
+
+      <div class="checkout-actions">
+        <button class="btn-gold" id="placeOrderBtn" type="button" aria-label="Place order" disabled>Place Order</button>
+        <button class="btn-outline" id="cancelCheckout" type="button" aria-label="Cancel checkout">Cancel</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="orders-modal" id="ordersModal" aria-hidden="true">
+    <div class="orders-card" role="dialog" aria-modal="true" aria-labelledby="ordersTitle">
+      <button class="icon-btn close-login" id="closeOrders" aria-label="Close order history">✕</button>
+      <h3 id="ordersTitle">Your Orders</h3>
+      <div class="order-filters" role="tablist" aria-label="Order status filter">
+        <button class="order-filter-btn active" data-filter="all" type="button">All</button>
+        <button class="order-filter-btn" data-filter="placed" type="button">Placed</button>
+        <button class="order-filter-btn" data-filter="delivered" type="button">Delivered</button>
+      </div>
+      <div class="orders-list" id="ordersList"></div>
+    </div>
+  </section>
+
+  <header class="navbar">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="Aman Shoppy homepage">
+        <img alt="Aman Shoppy logo" src="assets/logo.jpeg" width="40" height="40">
+        <span>AMAN SHOPPY</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="menu">
+          <li><a href="index.html#mens">Men's Perfumes</a></li>
+          <li><a href="index.html#womens">Women's Perfumes</a></li>
+          <li><a href="index.html#brands">Unisex</a></li>
+          <li><a href="index.html#brands">Featured Brands</a></li>
+          <li><a href="index.html#best">Best Sellers</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-icons">
+        <button class="icon-btn" id="searchToggle" aria-label="Open product search">⌕</button>
+        <button class="icon-btn" id="wishlistToggle" aria-label="Wishlist items">♡<span class="badge" id="wishCount">0</span></button>
+        <button class="icon-btn" id="cartToggle" aria-label="Open shopping cart">🛒<span class="badge" id="cartCount">0</span></button>
+        <button class="icon-btn" id="ordersToggle" aria-label="Open order history">📦<span class="badge" id="ordersCount">0</span></button>
+        <a href="login.html" class="account-btn" id="authLinkLogin">Login</a>
+        <a href="dashboard.html" class="account-btn" id="authLinkAccount" style="display:none;">My Account</a>
+        <button type="button" class="account-btn" id="navLogoutBtn" style="display:none;">Logout</button>
+      </div>
+      <button class="icon-btn hamburger" id="openMobile" aria-label="Open menu">☰</button>
+    </div>
+    <div class="search-bar-wrap" id="searchWrap">
+      <div class="container search-row">
+        <input id="searchInput" type="text" placeholder="Search luxury perfumes..." aria-label="Search products by name">
+        <button class="icon-btn" id="closeSearch" aria-label="Close search">✕</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Promotional banner slider">
+      <article class="slide active" style="background-image: url('images/hero1.jpeg');">
+        <div>
+          <h1 class="shimmer">Discover Your Signature Scent</h1>
+          <p>Limited Edition Collection Now Available</p>
+        </div>
+      </article>
+      <article class="slide" style="background-image: url('images/hero2.jpeg');">
+        <div>
+          <h1>Men's Exclusive Collection</h1>
+          <p>Powerful fragrances crafted for timeless sophistication.</p>
+          <button type="button" class="btn-gold">EXPLORE NOW</button>
+        </div>
+      </article>
+      <article class="slide" style="background-image: url('images/hero3.jpeg');">
+        <div>
+          <h1>Women's Luxury Fragrances</h1>
+          <p>Elegant notes that celebrate confidence and grace.</p>
+          <button type="button" class="btn-gold">VIEW COLLECTION</button>
+        </div>
+      </article>
+
+      <button type="button" class="icon-btn hero-control left" id="prevSlide" aria-label="Previous slide">‹</button>
+      <button type="button" class="icon-btn hero-control right" id="nextSlide" aria-label="Next slide">›</button>
+      <div class="hero-dots" id="heroDots"></div>
+    </section>
+
+    <section class="products reveal container" id="mens">
+      <div class="section-head">
+        <h2 class="shimmer">NEW ARRIVALS</h2>
+      </div>
+      <div class="carousel-wrap">
+        <button type="button" class="icon-btn section-arrow left" data-track="newArrivals" data-dir="-1" aria-label="Scroll new arrivals left">‹</button>
+        <div class="carousel-track" id="newArrivals"></div>
+        <button type="button" class="icon-btn section-arrow right" data-track="newArrivals" data-dir="1" aria-label="Scroll new arrivals right">›</button>
+      </div>
+    </section>
+
+    <section class="products reveal container" id="best">
+      <div class="section-head">
+        <h2 class="shimmer">BEST SELLERS</h2>
+      </div>
+      <div class="carousel-wrap">
+        <button type="button" class="icon-btn section-arrow left" data-track="bestSellers" data-dir="-1" aria-label="Scroll best sellers left">‹</button>
+        <div class="carousel-track" id="bestSellers"></div>
+        <button type="button" class="icon-btn section-arrow right" data-track="bestSellers" data-dir="1" aria-label="Scroll best sellers right">›</button>
+      </div>
+    </section>
+
+    <section class="products reveal container" id="womens">
+      <div class="section-head">
+        <h2 class="shimmer">SHOP WOMEN'S PERFUMES</h2>
+      </div>
+      <div class="carousel-wrap">
+        <button type="button" class="icon-btn section-arrow left" data-track="womensPerfumes" data-dir="-1" aria-label="Scroll womens perfumes left">‹</button>
+        <div class="carousel-track" id="womensPerfumes"></div>
+        <button type="button" class="icon-btn section-arrow right" data-track="womensPerfumes" data-dir="1" aria-label="Scroll womens perfumes right">›</button>
+      </div>
+    </section>
+
+    <section class="brands reveal" id="brands">
+      <div class="container">
+        <h2 class="shimmer">FEATURED BRANDS</h2>
+        <div class="brand-grid">
+          <article class="brand-card">Armaf</article>
+          <article class="brand-card">BVLGARI</article>
+          <article class="brand-card">Estiara</article>
+          <article class="brand-card">Swiss Arabian</article>
+          <article class="brand-card">Rassasi</article>
+          <article class="brand-card">Ajmal</article>
+          <article class="brand-card">Lattafa</article>
+          <article class="brand-card">Ratlam</article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="about">
+    <div class="container footer-grid">
+      <div>
+        <h4>CUSTOMER SERVICE</h4>
+        <ul>
+          <li>Customer Service</li>
+          <li>Women's Perfume</li>
+          <li>Export Location</li>
+        </ul>
+      </div>
+      <div>
+        <h4>ACCOUNT</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="dashboard.html">My Account</a></li>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT US</h4>
+        <ul>
+          <li>📞 +91 9175349009</li>
+          <li>✉ nmpatvekar1977@gmail.com</li>
+          <li>@newamanshoppy</li>
+        </ul>
+      </div>
+      <div>
+        <h4>OUR STORE</h4>
+        <ul>
+          <li>Momin Mohalla, Near Jama Masjid,</li>
+          <li>Islampur, Maharashtra - 415409</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="payments" aria-label="Payment options">
+        <span>VISA</span><span>Mastercard</span><span>PayPal</span>
+      </div>
+      <small>© 2026 Aman Shoppy - Luxury Perfumes | World of Scents. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>

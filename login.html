@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Aman Shoppy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page" data-page="login">
+  <header class="navbar">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="Aman Shoppy home">
+        <img alt="Aman Shoppy logo" src="assets/logo.jpeg" width="40" height="40">
+        <span>AMAN SHOPPY</span>
+      </a>
+      <nav aria-label="Login page navigation">
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">My Account</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="login-card" role="region" aria-labelledby="loginTitle">
+      <h3 id="loginTitle">Login</h3>
+      <form id="loginForm" novalidate>
+        <div class="login-group">
+          <label for="loginEmail">Email Address</label>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" required aria-describedby="emailError">
+          <p class="field-error" id="emailError" aria-live="polite"></p>
+        </div>
+
+        <div class="login-group">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" required aria-describedby="passwordError">
+          <p class="field-error" id="passwordError" aria-live="polite"></p>
+        </div>
+
+        <div class="auth-row">
+          <label class="remember-wrap" for="rememberMe">
+            <input id="rememberMe" name="rememberMe" type="checkbox">
+            Remember Me
+          </label>
+          <div class="auth-actions">
+            <a href="#" aria-label="Reset your password">Forgot Password?</a>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-gold" style="width: 100%;" aria-label="Log in to your account">Login</button>
+      </form>
+      <p class="register-link">Don't have an account? <a href="#" aria-label="Sign up for a new account">Sign up</a></p>
+    </div>
+  </main>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
